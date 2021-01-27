@@ -110,6 +110,104 @@ add_shortcode('list_recent_posts', 'list_recent_posts');
 
 
 
+/* staff list start*/
+if ( ! function_exists('list_staff_posts') ) {
+    function list_staff_posts( $atts ){
+
+        $atts = shortcode_atts( array(
+            'ptype' => '',
+            'per_page'  =>      2,
+            'order'     =>  'DESC',
+            'orderby'   =>  'date',
+            'category' => '',
+            'class' => '',
+            'pagination' => '',
+        ), $atts );
+
+        $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+
+        $class = $atts['class'];
+        $pagination = $atts['pagination'];
+
+        $args = array(
+            'post_type'    =>  $atts["ptype"],
+            'posts_per_page'    =>  $atts["per_page"],
+            'order'             =>  $atts["order"],
+            'orderby'           =>  $atts["orderby"],
+            'paged'             =>  $paged,
+            'category_name' => $atts["category"],
+        );
+
+        $query = new WP_Query($args);
+
+        $output = '';
+        $output .= '<div class="staff-flex-wrap '.$class.'">';
+
+        if($query->have_posts()) : $output;
+
+            while ($query->have_posts()) : $query->the_post();
+
+                $output .= '<div id="post-' . get_the_ID() . '" class="staff-content-wrap ' . implode(' ', get_post_class()) . '">';
+//start
+$output .= '<a href="' . get_permalink() . '" title="' . the_title('','',false) . '">';
+$output .= '<div class="staff-wrap">';
+
+
+                if ( has_post_thumbnail() ) {
+                    $output .= '<div class="thumbnail">';
+                    $output .= get_the_post_thumbnail( get_the_id(), 'full', array('class' => 'staff-headshot'));
+                    $output .= '</div>';
+                } else {
+                }
+
+                $output .= '<div class="staff-overlay">';
+                $output .= '<div class="staff-text">';
+                $output .= get_the_excerpt();
+                $output .= '<span>See More</span></div>';
+                $output .= '</div>';
+
+
+                $output .= '</div>';
+
+                $output .= '<h6 class="staff-name"><span>' . the_title('','',false) . '</span></h6><button class="staff-button">Bio</button>';
+
+$output .= '</a>';
+                $output .= '</div>';
+//end
+            endwhile;global $wp_query;
+            $output .= '</div>';
+            $output .= '<div class="clearfix"></div>';
+
+            $args_pagi = array(
+                'base' => add_query_arg( 'paged', '%#%' ),
+                'total' => $query->max_num_pages,
+                'current' => $paged
+            );
+
+            $output .= '<div class="post-nav col-md-12 ' . $pagination . '">';
+            $output .= paginate_links( $args_pagi);
+
+            //    $output .= '<div class="next-page">' . get_next_posts_link( "Older Entries »", 3 ) . '</div>';
+
+            $output .= '</div>';
+
+        else:
+
+            $output .= '<p>Sorry, there are no posts to display</p>';
+
+        endif;
+        wp_reset_postdata();
+
+        return $output;
+    }
+}
+
+add_shortcode('list_staff_posts', 'list_staff_posts');
+
+/* staff list end*/
+
+
+
 
 
 /*recent posts list horizontal start*/
@@ -266,33 +364,28 @@ if ( ! function_exists('carousel_recent_posts') ) {
 
             while ($query->have_posts()) : $query->the_post();
 
-                $output .= '<div id="post-' . get_the_ID() . '" class="'.$column.' ' . implode(' ', get_post_class()) . '">';
+                $output .= '<div id="post-' . get_the_ID() . '" class="'.$column.' ' . implode(' ', get_post_class('colleges-card')) . '">';
 
-                $output .= '<div class="thumbnail">';
 
+
+                // new
+                $output .= '<a href="' . get_permalink() . '" title="' . the_title('','',false) . '"><div class="colleges-card-image">';
                 if ( has_post_thumbnail() ) {
-
-                    $output .= '<a href="' . get_permalink() . '" title="' . the_title('','',false) . '">';
                     $output .= get_the_post_thumbnail( get_the_id(), 'article_thumbnail', array('class' => 'img-responsive aligncenter'));
-                    $output .= '</a>';
-
                 } else {
-
-
                 }
-
-                $output .= '<div class="caption caption-fixedh">';
-
-                $output .= '<h3 class="post-title"><span><a href="' . get_permalink() . '" title="' . the_title('','',false) . '">' . the_title('','',false) . '</a></span></h3>';
-
+                $output .= '<div class="colleges-card-content">';
+                $output .= '<h3 class="post-title"><span>' . the_title('','',false) . '</span></h3>';
+                $output .= '<p>';
                 $output .= get_the_excerpt();
+                $output .= '</p><button>More</button>';
+                $output .= '</div>';
+                $output .= '</div></a>';
+                // NEW END
+
 
                 $output .= '</div>';
-                $output .= '<div class="clearfix"></div>';
-
-
-                $output .= '</div>';
-                $output .= '</div>';
+                // close loop
 
             endwhile;global $wp_query;
             $output .= '</div>';

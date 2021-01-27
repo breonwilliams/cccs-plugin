@@ -118,3 +118,35 @@
 .slick-arrow.slick-hidden {
     display: none;
 }
+
+/* custom styles */
+.slick-dots li.slick-active button:before {
+    background: #033E65!important;
+    border-color: #033E65!important;
+    opacity: 1!important;
+    border-radius: 50%!important;
+}
+
+.slick-dots li button:before {
+    border-radius: 50%!important;
+    background: #EAEAEA;
+    border: 1px solid #707070;
+    opacity: 1!important;
+    webkit-transform: scale(.9);
+    transform: scale(.9);
+  }
+
+element.style {
+}
+.slick-dots li button {
+    width: 14px!important;
+    height: 14px!important;
+  }
+
+  .slick-dots {
+    bottom: -40px!important;
+  }
+
+  .slick-prev, .slick-next {
+      border-radius: 50%;
+    }
