@@ -210,6 +210,107 @@ add_shortcode('list_staff_posts', 'list_staff_posts');
 
 
 
+
+/* custom card list start*/
+if ( ! function_exists('custom_card_posts') ) {
+    function custom_card_posts( $atts ){
+
+        $atts = shortcode_atts( array(
+            'ptype' => '',
+            'per_page'  =>      2,
+            'order'     =>  'DESC',
+            'orderby'   =>  'date',
+            'category' => '',
+            'class' => '',
+            'pagination' => '',
+        ), $atts );
+
+        $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+
+        $class = $atts['class'];
+        $pagination = $atts['pagination'];
+
+        $args = array(
+            'post_type'    =>  $atts["ptype"],
+            'posts_per_page'    =>  $atts["per_page"],
+            'order'             =>  $atts["order"],
+            'orderby'           =>  $atts["orderby"],
+            'paged'             =>  $paged,
+            'category_name' => $atts["category"],
+        );
+
+        $query = new WP_Query($args);
+
+        $output = '';
+        $output .= '<div class="staff-flex-wrap '.$class.'">';
+
+        if($query->have_posts()) : $output;
+
+            while ($query->have_posts()) : $query->the_post();
+
+                $output .= '<div id="post-' . get_the_ID() . '" class="staff-content-wrap ' . implode(' ', get_post_class()) . '">';
+//start
+$output .= '<a href="' . get_permalink() . '" title="' . the_title('','',false) . '">';
+$output .= '<div class="staff-wrap">';
+
+
+                if ( has_post_thumbnail() ) {
+                    $output .= '<div class="thumbnail">';
+                    $output .= get_the_post_thumbnail( get_the_id(), 'full', array('class' => 'staff-headshot'));
+                    $output .= '</div>';
+                } else {
+                }
+
+                $output .= '<div class="staff-overlay">';
+                $output .= '<div class="staff-text">';
+                $output .= get_the_excerpt();
+                $output .= '<span>See More</span></div>';
+                $output .= '</div>';
+
+
+                $output .= '</div>';
+
+                $output .= '<h6 class="staff-name"><span>' . the_title('','',false) . '</span></h6><button class="staff-button">Bio</button>';
+
+$output .= '</a>';
+                $output .= '</div>';
+//end
+            endwhile;global $wp_query;
+            $output .= '</div>';
+            $output .= '<div class="clearfix"></div>';
+
+            $args_pagi = array(
+                'base' => add_query_arg( 'paged', '%#%' ),
+                'total' => $query->max_num_pages,
+                'current' => $paged
+            );
+
+            $output .= '<div class="post-nav col-md-12 ' . $pagination . '">';
+            $output .= paginate_links( $args_pagi);
+
+            //    $output .= '<div class="next-page">' . get_next_posts_link( "Older Entries »", 3 ) . '</div>';
+
+            $output .= '</div>';
+
+        else:
+
+            $output .= '<p>Sorry, there are no posts to display</p>';
+
+        endif;
+        wp_reset_postdata();
+
+        return $output;
+    }
+}
+
+add_shortcode('custom_card_posts', 'custom_card_posts');
+
+/* custom card list end*/
+
+
+
+
+
 /*recent posts list horizontal start*/
 if ( ! function_exists('list_recent_posts_horiz') ) {
     function list_recent_posts_horiz( $atts ){

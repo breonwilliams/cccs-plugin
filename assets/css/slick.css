@@ -149,4 +149,5 @@ element.style {
 
   .slick-prev, .slick-next {
       border-radius: 50%;
+      top: 50%!important;
     }
