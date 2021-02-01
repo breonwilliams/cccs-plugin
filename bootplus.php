@@ -22,6 +22,7 @@ function bootplus_shortcodes_add_scripts() {
     include($bootplus_shortcodes_path.'/assets/functions.php');
     wp_enqueue_style('style-css', $bootplus_shortcodes_directory.'assets/css/style.css');
     wp_enqueue_style('staff-css', $bootplus_shortcodes_directory.'assets/css/staff-style.css');
+    wp_enqueue_style('custom-card-css', $bootplus_shortcodes_directory.'assets/css/custom-card-style.css');
     wp_register_style( 'events-css', plugins_url( '/assets/css/recent-events.css', __FILE__ ), array(), null, 'all' );
     wp_register_style( 'slick-css', plugins_url( '/assets/css/slick.css', __FILE__ ), array(), null, 'all' );
     wp_register_style( 'slick-theme', plugins_url( '/assets/css/slick-theme.css', __FILE__ ), array(), null, 'all' );

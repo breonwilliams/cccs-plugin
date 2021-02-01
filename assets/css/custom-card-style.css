@@ -1,0 +1,149 @@
+.ccard-flex-wrap {
+  display: flex;
+}
+
+.more-btn {
+  position: absolute;
+  top: 85%;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+
+.ccard-wrap:hover .more-btn {
+  opacity: 1;
+}
+
+.more-btn span {
+  font-family: "Montserrat", Helvetica, sans-serif;
+  vertical-align: baseline;
+  background: transparent;
+  font-size: 20px;
+  padding: 0.3em 1em;
+  line-height: 1.7em !important;
+  border: 2px solid;
+  border-radius: 3px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ccard-content-wrap {
+  flex: 1;
+  margin: 0 0 30px 0;
+  border-radius: 4px;
+  text-align: center;
+  width: 50%;
+}
+
+.ccard-content-wrap img {
+  border-radius: 4px;
+}
+
+.ccard-content-wrap a {
+  text-decoration: none;
+}
+
+a .ccard-wrap {
+  position: relative;
+  margin: 15px;
+  box-shadow: 0 5px 6px 0px rgba(0, 0, 0, 0.3);
+}
+
+a .ccard-headshot {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+a .ccard-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  transition: 0.5s ease;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ccard-wrap:hover .ccard-overlay {
+  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.6));
+}
+
+a .ccard-text {
+  color: white;
+  font-size: 19px;
+  font-weight: 300;
+  position: absolute;
+  top: 70%;
+  left: 48%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: left;
+  font-family: 'Montserrat', Helvetica, Arial, Lucida, sans-serif;
+  width: 85%;
+  margin: 15px;
+}
+
+.ccard-wrap:hover .ccard-text {
+  position: absolute;
+  top: 30% !important;
+}
+
+.ccard-text p {
+  line-height: 1.7em;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 0;
+  font-size: 20px;
+  letter-spacing: 0.62px;
+  font-family: "Montserrat", Helvetica, sans-serif;
+  color: #fff;
+  text-align: left;
+}
+
+.ccard-text h6 {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  background: transparent;
+  padding-bottom: 10px;
+  line-height: 1em;
+  font-family: "Montserrat", Helvetica, sans-serif;
+  letter-spacing: -0.53px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  text-align: left;
+}
+
+a .ccard-text span {
+  color: #FFCD4F;
+  display: block;
+  margin-top: 15px;
+}
+
+
+
+@media (max-width: 900px) {
+  .ccard-content-wrap {
+    flex: 1;
+  }
+}
+
+@media (max-width: 400px) {
+  .ccard-content-wrap {
+    flex: 0 0 100%;
+  }
+}

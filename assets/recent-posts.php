@@ -242,16 +242,15 @@ if ( ! function_exists('custom_card_posts') ) {
         $query = new WP_Query($args);
 
         $output = '';
-        $output .= '<div class="staff-flex-wrap '.$class.'">';
+        $output .= '<div class="ccard-flex-wrap '.$class.'">';
 
         if($query->have_posts()) : $output;
 
             while ($query->have_posts()) : $query->the_post();
-
-                $output .= '<div id="post-' . get_the_ID() . '" class="staff-content-wrap ' . implode(' ', get_post_class()) . '">';
 //start
-$output .= '<a href="' . get_permalink() . '" title="' . the_title('','',false) . '">';
-$output .= '<div class="staff-wrap">';
+                $output .= '<div id="post-' . get_the_ID() . '" class="ccard-content-wrap ' . implode(' ', get_post_class()) . '">';
+                $output .= '<a href="' . get_permalink() . '" title="' . the_title('','',false) . '">';
+                $output .= '<div class="ccard-wrap">';
 
 
                 if ( has_post_thumbnail() ) {
@@ -261,16 +260,18 @@ $output .= '<div class="staff-wrap">';
                 } else {
                 }
 
-                $output .= '<div class="staff-overlay">';
-                $output .= '<div class="staff-text">';
-                $output .= get_the_excerpt();
-                $output .= '<span>See More</span></div>';
+                $output .= '<div class="ccard-overlay">';
+                $output .= '<div class="ccard-text">';
+                $output .= '<h6>' . the_title('','',false) . '</h6>';
+                $output .= get_the_excerpt('');
+                $output .= '</div>';
+                $output .= '</div>';
+                $output .= '<div class="more-btn"><span>See More</span></div>';
+
+
+
                 $output .= '</div>';
 
-
-                $output .= '</div>';
-
-                $output .= '<h6 class="staff-name"><span>' . the_title('','',false) . '</span></h6><button class="staff-button">Bio</button>';
 
 $output .= '</a>';
                 $output .= '</div>';
