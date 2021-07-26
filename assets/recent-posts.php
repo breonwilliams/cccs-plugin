@@ -122,6 +122,7 @@ if ( ! function_exists('list_staff_posts') ) {
             'category' => '',
             'class' => '',
             'pagination' => '',
+            'line' => '',
         ), $atts );
 
         $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
@@ -136,6 +137,11 @@ if ( ! function_exists('list_staff_posts') ) {
             'orderby'           =>  $atts["orderby"],
             'paged'             =>  $paged,
             'category_name' => $atts["category"],
+            'tax_query'         => array( array(
+            'taxonomy'  => 'card_category',
+            'field'     => 'slug',
+            'terms'     => array( sanitize_title( $atts['line'] ) )
+        ) )
         );
 
         $query = new WP_Query($args);
@@ -169,7 +175,7 @@ $output .= '<div class="staff-wrap">';
 
                 $output .= '</div>';
 
-                $output .= '<h6 class="staff-name"><span>' . the_title('','',false) . '</span></h6><button class="staff-button">Bio</button>';
+                $output .= '<h6 class="staff-name"><span>' . the_title('','',false) . '</span></h6><button class="staff-button">Read Bio</button>';
 
 $output .= '</a>';
                 $output .= '</div>';
@@ -223,6 +229,7 @@ if ( ! function_exists('custom_card_posts') ) {
             'category' => '',
             'class' => '',
             'pagination' => '',
+            'line' => '',
         ), $atts );
 
         $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
@@ -237,6 +244,11 @@ if ( ! function_exists('custom_card_posts') ) {
             'orderby'           =>  $atts["orderby"],
             'paged'             =>  $paged,
             'category_name' => $atts["category"],
+            'tax_query'         => array( array(
+            'taxonomy'  => 'card_category',
+            'field'     => 'slug',
+            'terms'     => array( sanitize_title( $atts['line'] ) )
+        ) )
         );
 
         $query = new WP_Query($args);
