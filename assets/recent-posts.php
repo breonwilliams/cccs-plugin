@@ -122,7 +122,6 @@ if ( ! function_exists('list_staff_posts') ) {
             'category' => '',
             'class' => '',
             'pagination' => '',
-            'line' => '',
         ), $atts );
 
         $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
@@ -137,11 +136,7 @@ if ( ! function_exists('list_staff_posts') ) {
             'orderby'           =>  $atts["orderby"],
             'paged'             =>  $paged,
             'category_name' => $atts["category"],
-            'tax_query'         => array( array(
-            'taxonomy'  => 'card_category',
-            'field'     => 'slug',
-            'terms'     => array( sanitize_title( $atts['line'] ) )
-        ) )
+
         );
 
         $query = new WP_Query($args);
