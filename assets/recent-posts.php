@@ -170,7 +170,7 @@ $output .= '<div class="staff-wrap">';
 
                 $output .= '</div>';
 
-                $output .= '<h6 class="staff-name"><span>' . the_title('','',false) . '</span></h6><button class="staff-button">Read Bio</button>';
+                $output .= '<h6 class="staff-name"><span>' . the_title('','',false) . '</span></h6><p>' . get_field('member_title') . '</p><button class="staff-button">Read Bio</button>';
 
 $output .= '</a>';
                 $output .= '</div>';
